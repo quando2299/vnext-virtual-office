@@ -1,20 +1,20 @@
 import { monitor } from '@colyseus/monitor';
-import { RoomType } from './../../types/Room';
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { LobbyRoom, Server } from 'colyseus';
 import cors from 'cors';
 import express from 'express';
 import http from 'http';
 
-const port = Number(process.env.PORT || 2567);
+// import socialRoutes from "@colyseus/social/express"
 
+import { RoomType } from 'apps/types/Room';
+import { SkyOffice } from './rooms/SkyOffice';
+
+const port = Number(process.env.PORT || 3333);
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+// app.use(express.static('dist'))
 
 const server = http.createServer(app);
 const gameServer = new Server({
@@ -23,13 +23,22 @@ const gameServer = new Server({
 
 // register room handlers
 gameServer.define(RoomType.LOBBY, LobbyRoom);
-// gameServer.define(RoomType.PUBLIC, SkyOffice, {
-//   name: 'Public Lobby',
-//   description: 'For making friends and familiarizing yourself with the controls',
-//   password: null,
-//   autoDispose: false,
-// })
-// gameServer.define(RoomType.CUSTOM, SkyOffice).enableRealtimeListing()
+gameServer.define(RoomType.PUBLIC, SkyOffice, {
+  name: 'Public Lobby',
+  description:
+    'For making friends and familiarizing yourself with the controls',
+  password: null,
+  autoDispose: false,
+});
+gameServer.define(RoomType.CUSTOM, SkyOffice).enableRealtimeListing();
+
+/**
+ * Register @colyseus/social routes
+ *
+ * - uncomment if you want to use default authentication (https://docs.colyseus.io/server/authentication/)
+ * - also uncomment the import statement
+ */
+// app.use("/", socialRoutes);
 
 // register colyseus monitor AFTER registering your room handlers
 app.use('/colyseus', monitor());
