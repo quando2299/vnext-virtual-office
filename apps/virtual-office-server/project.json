@@ -1,0 +1,53 @@
+{
+  "name": "virtual-office-server",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/virtual-office-server/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/virtual-office-server",
+        "main": "apps/virtual-office-server/src/main.ts",
+        "tsConfig": "apps/virtual-office-server/tsconfig.app.json",
+        "assets": ["apps/virtual-office-server/src/assets"],
+        "webpackConfig": "apps/virtual-office-server/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "virtual-office-server:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "virtual-office-server:build:development"
+        },
+        "production": {
+          "buildTarget": "virtual-office-server:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/virtual-office-server/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
