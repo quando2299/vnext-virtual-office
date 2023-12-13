@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../images/logo.png';
+import logo from '../images/logoo.png';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -185,7 +185,7 @@ export default function RoomSelectionDialog() {
             </CustomRoomWrapper>
           ) : (
             <>
-              <Title>Welcome to SkyOffice</Title>
+              <Title>Welcome to Vnext Virtual Office</Title>
               <Content>
                 <img src={logo} alt="logo" />
                 <Button
