@@ -4,12 +4,10 @@ import cors from 'cors';
 import express from 'express';
 import http from 'http';
 
-// import socialRoutes from "@colyseus/social/express"
-
-import { RoomType } from 'apps/types/Room';
+import { RoomType } from '../../types/Room';
 import { SkyOffice } from './rooms/SkyOffice';
 
-const port = Number(process.env.PORT || 3333);
+const port = Number(process.env.PORT || 2567);
 const app = express();
 
 app.use(cors());
@@ -31,14 +29,6 @@ gameServer.define(RoomType.PUBLIC, SkyOffice, {
   autoDispose: false,
 });
 gameServer.define(RoomType.CUSTOM, SkyOffice).enableRealtimeListing();
-
-/**
- * Register @colyseus/social routes
- *
- * - uncomment if you want to use default authentication (https://docs.colyseus.io/server/authentication/)
- * - also uncomment the import statement
- */
-// app.use("/", socialRoutes);
 
 // register colyseus monitor AFTER registering your room handlers
 app.use('/colyseus', monitor());

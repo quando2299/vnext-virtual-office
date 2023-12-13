@@ -1,8 +1,14 @@
 import { Dispatcher } from '@colyseus/command';
-import { Message } from 'apps/types/Message';
-import { IRoomData } from 'apps/types/Room';
+import { Message } from '../../../types/Message';
+import { IRoomData } from '../../../types/Room';
 import bcrypt from 'bcrypt';
-import { Client, Room, ServerError } from 'colyseus';
+import {
+  Client,
+  Room,
+  SchemaSerializer,
+  Serializer,
+  ServerError,
+} from 'colyseus';
 import ChatMessageUpdateCommand from './commands/ChatMessageUpdateCommand';
 import {
   ComputerAddUserCommand,
@@ -81,7 +87,7 @@ export class SkyOffice extends Room<OfficeState> {
       Message.STOP_SCREEN_SHARE,
       (client, message: { computerId: string }) => {
         const computer = this.state.computers.get(message.computerId);
-        computer.connectedUser.forEach((id) => {
+        computer!.connectedUser.forEach((id: string) => {
           this.clients.forEach((cli) => {
             if (cli.sessionId === id && cli.sessionId !== client.sessionId) {
               cli.send(Message.STOP_SCREEN_SHARE, client.sessionId);
@@ -184,7 +190,7 @@ export class SkyOffice extends Room<OfficeState> {
   async onAuth(client: Client, options: { password: string | null }) {
     if (this.password) {
       const validPassword = await bcrypt.compare(
-        options.password,
+        options.password!,
         this.password
       );
       if (!validPassword) {
@@ -221,8 +227,8 @@ export class SkyOffice extends Room<OfficeState> {
 
   onDispose() {
     this.state.whiteboards.forEach((whiteboard) => {
-      if (whiteboardRoomIds.has(whiteboard.roomId))
-        whiteboardRoomIds.delete(whiteboard.roomId);
+      if (whiteboardRoomIds.has(whiteboard.roomId!))
+        whiteboardRoomIds.delete(whiteboard.roomId!);
     });
 
     console.log('room', this.roomId, 'disposing...');

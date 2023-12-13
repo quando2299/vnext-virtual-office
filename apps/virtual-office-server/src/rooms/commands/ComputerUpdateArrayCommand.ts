@@ -1,5 +1,5 @@
 import { Command } from '@colyseus/command';
-import { IOfficeState } from 'apps/types/IOfficeState';
+import { IOfficeState } from '../../../../types/IOfficeState';
 import { Client, Room } from 'colyseus';
 
 type Payload = {
@@ -7,10 +7,7 @@ type Payload = {
   computerId: string;
 };
 
-export class ComputerAddUserCommand extends Command<
-  Room<IOfficeState>,
-  Payload
-> {
+export class ComputerAddUserCommand extends Command<IOfficeState, Payload> {
   execute(data: Payload) {
     const { client, computerId } = data;
     const computer = this.room.state.computers.get(computerId);
@@ -21,10 +18,7 @@ export class ComputerAddUserCommand extends Command<
   }
 }
 
-export class ComputerRemoveUserCommand extends Command<
-  Room<IOfficeState>,
-  Payload
-> {
+export class ComputerRemoveUserCommand extends Command<IOfficeState, Payload> {
   execute(data: Payload) {
     const { client, computerId } = data;
     const computer = this.state.computers.get(computerId);

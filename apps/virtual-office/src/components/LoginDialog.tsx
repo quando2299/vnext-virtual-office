@@ -8,9 +8,10 @@ import AlertTitle from '@mui/material/AlertTitle';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import Navigation from 'swiper'; // TODO: Double check this
+
 import Adam from '../images/login/Adam_login.png';
 import Ash from '../images/login/Ash_login.png';
 import Lucy from '../images/login/Lucy_login.png';

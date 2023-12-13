@@ -1,5 +1,5 @@
 import { Command } from '@colyseus/command';
-import { IOfficeState } from 'apps/types/IOfficeState';
+import { IOfficeState } from '../../../../types/IOfficeState';
 import { Client, Room } from 'colyseus';
 
 type Payload = {
@@ -8,7 +8,7 @@ type Payload = {
 };
 
 export default class PlayerUpdateNameCommand extends Command<
-  Room<IOfficeState>,
+  IOfficeState,
   Payload
 > {
   execute(data: Payload) {

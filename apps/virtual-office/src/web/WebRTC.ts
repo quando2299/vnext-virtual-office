@@ -1,4 +1,3 @@
-// import Peer from 'peerjs'
 import Peer, { MediaConnection } from 'peerjs';
 import Network from '../services/Network';
 import store from '../stores';

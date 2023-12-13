@@ -1,5 +1,5 @@
 import { Command } from '@colyseus/command';
-import { IOfficeState } from 'apps/types/IOfficeState';
+import { IOfficeState } from '../../../../types/IOfficeState';
 import { Client, Room } from 'colyseus';
 import { ChatMessage } from '../schema/OfficeState';
 
@@ -9,7 +9,7 @@ type Payload = {
 };
 
 export default class ChatMessageUpdateCommand extends Command<
-  Room<IOfficeState>,
+  IOfficeState,
   Payload
 > {
   execute(data: Payload) {

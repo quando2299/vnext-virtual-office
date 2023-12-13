@@ -1,16 +1,16 @@
 import {
-  ArraySchema,
-  MapSchema,
   Schema,
+  ArraySchema,
   SetSchema,
+  MapSchema,
   type,
 } from '@colyseus/schema';
 import {
-  IChatMessage,
-  IComputer,
-  IOfficeState,
   IPlayer,
+  IOfficeState,
+  IComputer,
   IWhiteboard,
+  IChatMessage,
 } from '../../../../types/IOfficeState';
 
 export class Player extends Schema implements IPlayer {

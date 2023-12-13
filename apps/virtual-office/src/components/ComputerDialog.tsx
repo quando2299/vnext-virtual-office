@@ -74,7 +74,6 @@ const VideoGrid = styled.div`
   }
 `;
 
-// TODO: add type for props
 function VideoContainer({ playerName, stream }) {
   return (
     <div className="video-container">

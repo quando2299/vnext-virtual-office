@@ -1,4 +1,6 @@
 import Background from './scenes/Background';
+import Bootstrap from './scenes/Bootstrap';
+import Game from './scenes/Game';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -18,7 +20,7 @@ const config: Phaser.Types.Core.GameConfig = {
     },
   },
   autoFocus: true,
-  scene: [Background],
+  scene: [Bootstrap, Background, Game],
 };
 
 const phaserGame = new Phaser.Game(config);
